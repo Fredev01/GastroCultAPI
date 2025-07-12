@@ -3,7 +3,7 @@ def recipe_search_prompt(location: str) -> str:
     Generate a prompt for searching recipes based on the provided location.
     """
     return f"""\
-        Genera una lista de al menos 20 recetas tradicionales de {location}.
+        Genera una lista de al menos 5 recetas tradicionales de {location}.
         Para cada receta, incluye:
         - El nombre del platillo
         - Una breve descripción
@@ -22,7 +22,7 @@ def recipe_search_prompt(location: str) -> str:
             }},
             ...
             ],
-            "preparation": [
+            "instructions": [
             "Instrucción 1",
             "Instrucción 2",
             ...
