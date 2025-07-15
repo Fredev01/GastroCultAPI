@@ -1,4 +1,4 @@
-# GastroCultApi 🍽️
+e# GastroCultApi 🍽️
 
 Una API de FastAPI que utiliza inteligencia artificial para generar recetas culinarias basadas en ubicaciones geográficas específicas.
 
@@ -77,9 +77,19 @@ GastroCultApi/
    GEMINI_API_KEY=tu_api_key_de_google_gemini
    ```
 
-5. **Ejecutar la aplicación**
+   ```env
+   REDIS_URL=redis://localhost:6379
+   ```
+
+5. **Levantar la BD redis**
+
    ```bash
-   uvicorn app.main:app --reload
+   docker compose up -d
+   ```
+
+6. **Ejecutar la aplicación**
+   ```bash
+    fastapi dev app
    ```
 
 ## 🔧 Configuración
