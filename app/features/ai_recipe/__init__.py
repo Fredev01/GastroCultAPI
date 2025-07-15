@@ -41,9 +41,16 @@ async def search_recipes(
     """
     try:
         location = request.location.strip()
+        parts = location.split(",")
+        municipality = parts[0].strip() if len(parts) > 0 else ""
+        state = parts[1].strip() if len(parts) > 1 else ""
+        if not municipality or not state:
+            raise HTTPException(
+                status_code=400, detail="Location must include municipality and state")
+        location_formatted = f"{municipality}, {state}"
 
         # 1. Verificar si existe en cache
-        cached_recipes = redis_service.get_recipe_cache(location)
+        cached_recipes = redis_service.get_recipe_cache(location_formatted)
         if cached_recipes:
             return {"recipes": cached_recipes, "from_cache": True}
 
@@ -66,7 +73,7 @@ async def search_recipes(
         # 4. Guardar en cache solo si tiene contenido
         if recipes:
             redis_service.set_recipe_cache(
-                location, recipes, ttl=3600)  # 1 hora
+                location_formatted, recipes, ttl=3600)  # 1 hora
 
         return {"recipes": recipes, "from_cache": False}
 

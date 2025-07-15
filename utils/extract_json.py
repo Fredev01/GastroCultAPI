@@ -22,5 +22,4 @@ def extract_json_from_ia_response(response_text: str) -> list:
         raise HTTPException(status_code=400, detail="Invalid response format")
 
     json_content = match.group(1)
-    print(f"JSON content: {json_content}")
     return json.loads(json_content)
